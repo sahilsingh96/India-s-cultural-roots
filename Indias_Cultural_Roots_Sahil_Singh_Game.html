@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>India's Cultural Roots — SAHIL SINGH</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#24344d;background:linear-gradient(135deg,#fff5da,#e8f4ec);min-height:100vh}
+.wrap{max-width:980px;margin:auto;padding:18px}header,.card{background:#fff;border-radius:24px;box-shadow:0 10px 30px #0001}header{padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;gap:12px;align-items:center}.icon{font-size:44px}h1{margin:0;font-size:clamp(25px,5vw,38px)}.creator{color:#68768a;font-size:14px;margin-top:4px}.score{background:#fff0ad;padding:10px 14px;border-radius:14px;font-weight:800}
+main{margin-top:18px}.card{padding:25px}.hero{text-align:center;padding:45px 22px}.hero .bigicon{font-size:78px}h2{margin-top:8px}
+button{border:0;border-radius:14px;padding:13px 18px;font-weight:800;font-size:16px;cursor:pointer;background:#3f70a5;color:white;margin:5px}button.secondary{background:#e8edf3;color:#24344d}
+.levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:18px}.level{border:3px solid #dce5ef;border-radius:20px;padding:18px;min-height:145px;cursor:pointer}.level.locked{opacity:.45;cursor:not-allowed}.level.done{border-color:#4da36c}.li{font-size:40px}.level h3{margin:7px 0}small{color:#68768a}
+.meta{display:flex;justify-content:space-between;color:#68768a;font-weight:bold}.progress{height:12px;background:#e8edf1;border-radius:20px;margin:15px 0 22px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#e76f32,#d99b2b,#2f8b57)}
+.q{font-size:25px;font-weight:800;line-height:1.35;margin:15px 0 20px}.options{display:grid;gap:12px}.option{width:100%;text-align:left;background:#f7f9fb;color:#24344d;border:2px solid #dce5ef}.option.correct{background:#dcf5e5;border-color:#39a466}.option.wrong{background:#ffe0df;border-color:#d75b54}.feedback{min-height:48px;font-weight:800;padding-top:14px}
+.hidden{display:none}.center{text-align:center}.finalscore{font-size:62px;font-weight:900;color:#3f70a5}.badge{display:inline-block;background:#fff0ad;padding:9px 14px;border-radius:13px;font-weight:900}footer{text-align:center;color:#738096;padding:18px;font-size:13px}
+@media(max-width:600px){header{align-items:flex-start}.card{padding:18px}.q{font-size:21px}}
+</style></head><body><div class="wrap">
+<header><div class="brand"><div class="icon">🪷</div><div><h1>India's Cultural Roots</h1><div>Class 6 • NCERT • Level-Based Quiz</div><div class="creator">Created by <b>SAHIL SINGH</b></div></div></div><div class="score">⭐ <span id="score">0</span></div></header>
+<main>
+<section id="home" class="card hero"><div class="bigicon">🪷📜☸️</div><h2>Welcome, Cultural Explorer!</h2><p>Complete the four MCQ levels and then unlock the Map Explorer mission. The original 40 MCQs remain unchanged.</p><button onclick="map()">🚀 Start Game</button></section>
+<section id="map" class="card hidden"><h2>🗺️ Mission Map</h2><p>Complete one level to unlock the next.</p><div id="levels" class="levels"></div></section>
+<section id="game" class="card hidden"><div class="meta"><span id="lname"></span><span id="qcount"></span></div><div class="progress"><div id="bar" class="bar"></div></div><div id="question" class="q"></div><div id="options" class="options"></div><div id="feedback" class="feedback"></div><div class="center"><button id="next" class="hidden" onclick="next()">Continue ➜</button><button class="secondary" onclick="map()">🗺️ Map</button></div></section>
+<section id="result" class="card center hidden"><div style="font-size:70px" id="ri">🏅</div><h2 id="rt"></h2><div class="finalscore" id="rs">0</div><p id="rx"></p><div class="badge" id="rb"></div><br><button onclick="map()">🗺️ Continue</button></section>
+</main><footer>Created by <b>SAHIL SINGH</b> • India's Cultural Roots • Class 6</footer></div>
+<script>
+const DATA=[{"level": "Vedic Society", "q": "The word Veda comes from the Sanskrit root vid, which means:", "options": ["Worship", "Knowledge", "Truth", "Prayer"], "answer": 1}, {"level": "Vedic Society", "q": "How many Vedas are mentioned in the chapter?", "options": ["Two", "Three", "Four", "Five"], "answer": 2}, {"level": "Vedic Society", "q": "Which is considered the oldest of the four Vedas?", "options": ["Sama Veda", "Yajur Veda", "Atharva Veda", "Rig Veda"], "answer": 3}, {"level": "Vedic Society", "q": "The Vedic texts were mainly transmitted through:", "options": ["Paintings", "Oral recitation and memorisation", "Stone inscriptions", "Printed books"], "answer": 1}, {"level": "Vedic Society", "q": "The Rig Veda was composed in an early form of:", "options": ["Pali", "Tamil", "Sanskrit", "Prakrit"], "answer": 2}, {"level": "Vedic Society", "q": "The male and female seers associated with the Vedic hymns are called:", "options": ["Rajas and Ranis", "Rishis and Rishikas", "Gurus and Shishyas", "Munis and Yogis"], "answer": 1}, {"level": "Vedic Society", "q": "Which of the following is mentioned as a Vedic deity?", "options": ["Indra", "Mahavira", "Buddha", "Ashoka"], "answer": 0}, {"level": "Vedic Society", "q": "Ritam refers to:", "options": ["A type of sacrifice", "Truth and order in human life and the cosmos", "A Vedic language", "A political assembly"], "answer": 1}, {"level": "Vedic Society", "q": "The statement “The Existent is one, but sages give it many names” expresses the idea of:", "options": ["Many completely separate realities", "One reality known by different names", "Rejection of all deities", "Only one form of worship"], "answer": 1}, {"level": "Vedic Society", "q": "The concluding verses of the Rig Veda emphasise:", "options": ["Competition", "Unity and harmony", "Warfare", "Trade"], "answer": 1}, {"level": "Vedic Society", "q": "In the Vedic context, a jana was a:", "options": ["Temple", "Clan or larger group of people", "Profession", "Religious book"], "answer": 1}, {"level": "Vedic Society", "q": "The Rig Veda mentions more than:", "options": ["10 janas", "20 janas", "30 janas", "100 janas"], "answer": 3}, {"level": "Vedic Society", "q": "Which of the following was a jana mentioned in the chapter?", "options": ["Bharatas", "Mauryas", "Guptas", "Cholas"], "answer": 0}, {"level": "Vedic Society", "q": "Which terms provide clues about governance in Vedic society?", "options": ["Sabha and Samiti", "Sangha and Stupa", "Vihara and Chaitya", "Shreni and Nigama"], "answer": 0}, {"level": "Vedic Society", "q": "Which of the following was a profession mentioned in the Vedic texts?", "options": ["Carpenter", "Astronaut", "Software engineer", "Pilot"], "answer": 0}, {"level": "Buddhism", "q": "The historical person who became the Buddha was:", "options": ["Vardhamana", "Siddhartha Gautama", "Ashoka", "Panini"], "answer": 1}, {"level": "Buddhism", "q": "Siddhartha was born at:", "options": ["Bodh Gaya", "Sarnath", "Lumbini", "Kushinagar"], "answer": 2}, {"level": "Buddhism", "q": "Which of these was NOT one of the four sights encountered by Siddhartha?", "options": ["An old person", "A sick person", "A dead person", "A king"], "answer": 3}, {"level": "Buddhism", "q": "Siddhartha left his earlier life in search of:", "options": ["Wealth", "Political power", "Understanding of suffering and spiritual knowledge", "A larger kingdom"], "answer": 2}, {"level": "Buddhism", "q": "Siddhartha attained enlightenment at:", "options": ["Lumbini", "Bodh Gaya", "Puri", "Vaishali"], "answer": 1}, {"level": "Buddhism", "q": "The word “Buddha” refers to one who is:", "options": ["Victorious in war", "Awakened/enlightened", "A king", "A priest"], "answer": 1}, {"level": "Buddhism", "q": "According to the chapter, ignorance (avidyā) and ______ are at the root of suffering.", "options": ["Knowledge", "Attachment", "Friendship", "Charity"], "answer": 1}, {"level": "Buddhism", "q": "In the chapter, ahimsa in the Buddhist context is explained as:", "options": ["Non-hurting/non-injuring", "Giving away wealth", "Worshipping nature", "Fasting"], "answer": 0}, {"level": "Buddhism", "q": "The Buddha placed emphasis on:", "options": ["Inner discipline", "Wealth accumulation", "Military power", "Birth-based status"], "answer": 0}, {"level": "Buddhism", "q": "The Four Noble Truths deal primarily with:", "options": ["Agriculture", "Suffering and its ending", "Vedic rituals", "Political administration"], "answer": 1}, {"level": "Buddhism", "q": "According to the Four Noble Truths, the cause of suffering is connected with:", "options": ["Craving/attachment", "Education", "Nature", "Language"], "answer": 0}, {"level": "Buddhism", "q": "The path leading towards the end of suffering is called the:", "options": ["Middle Kingdom", "Eightfold Path", "Vedic Path", "Royal Path"], "answer": 1}, {"level": "Buddhism", "q": "The Buddha's teaching that simply bathing in sacred water does not make a person pure emphasises:", "options": ["External appearance", "Inner purity and conduct", "Wealth", "Physical strength"], "answer": 1}, {"level": "Jainism", "q": "Vardhamana is better known as:", "options": ["Buddha", "Mahavira", "Ashoka", "Panini"], "answer": 1}, {"level": "Jainism", "q": "Mahavira is described in the chapter as the:", "options": ["First Tirthankara", "10th Tirthankara", "24th Tirthankara", "25th Tirthankara"], "answer": 2}, {"level": "Jainism", "q": "Mahavira left his home at the age of:", "options": ["20", "25", "30", "40"], "answer": 2}, {"level": "Jainism", "q": "The word Jina means:", "options": ["Teacher", "Conqueror", "King", "Traveller"], "answer": 1}, {"level": "Jainism", "q": "In Jainism, the conquest referred to by Jina is mainly the conquest of:", "options": ["Other kingdoms", "Ignorance and attachments", "Other religions", "Nature"], "answer": 1}, {"level": "Jainism", "q": "Which set contains the three Jain teachings highlighted in the chapter?", "options": ["Ahimsa, Aparigraha, Anekantavada", "Dharma, Artha, Kama", "Truth, Wealth, Power", "Yoga, Yajna, Puja"], "answer": 0}, {"level": "Jainism", "q": "Aparigraha means:", "options": ["Non-possession", "Non-hurting", "Many-sidedness", "Meditation"], "answer": 0}, {"level": "Jainism", "q": "Anekantavada teaches that:", "options": ["Reality can have many aspects", "There is only one possible viewpoint", "Material possessions are essential", "Violence is necessary"], "answer": 0}, {"level": "Folk & Tribal Roots", "q": "Folk and tribal traditions were often preserved and passed on through:", "options": ["Oral traditions", "Newspapers", "Printed textbooks", "Modern technology"], "answer": 0}, {"level": "Folk & Tribal Roots", "q": "According to the chapter, tribal communities have:", "options": ["No distinct traditions", "Rich and diverse cultural traditions", "Only one common culture", "No connection with nature"], "answer": 1}, {"level": "Folk & Tribal Roots", "q": "The chapter gives the example of the Toda people, who consider many ______ in the Nilgiris sacred.", "options": ["Rivers", "Peaks", "Villages", "Forests"], "answer": 1}, {"level": "Folk & Tribal Roots", "q": "The chapter shows that Indian culture has developed through:", "options": ["Complete isolation of communities", "Continuous interaction and exchange among traditions", "One single cultural tradition", "Rejection of regional traditions"], "answer": 1}];
+const INFO=[
+ {name:"Vedic Society",icon:"📜",count:15},
+ {name:"Buddhism",icon:"☸️",count:13},
+ {name:"Jainism",icon:"🪷",count:8},
+ {name:"Folk & Tribal Roots",icon:"🌿",count:4},
+ {name:"Map Explorer",icon:"🗺️",count:6}
+];
+const MAPQ=[
+ {q:"Which place is associated with Siddhartha Gautama's birth?",a:["Lumbini","Bodh Gaya","Sarnath","Kushinagar"],c:0},
+ {q:"Which place is associated with the Buddha's enlightenment?",a:["Lumbini","Bodh Gaya","Sarnath","Kushinagar"],c:1},
+ {q:"Which place is associated with the Buddha's first teaching?",a:["Lumbini","Bodh Gaya","Sarnath","Kushinagar"],c:2},
+ {q:"Which place is associated with the Buddha's final passing away (Mahaparinirvana)?",a:["Lumbini","Bodh Gaya","Sarnath","Kushinagar"],c:3},
+ {q:"The chapter's Sapta Sindhava refers to the region of the:",a:["Seven rivers","Seven mountains","Seven kingdoms","Seven forests"],c:0},
+ {q:"The Toda example in the chapter is associated with the:",a:["Nilgiris","Himalayas","Vindhyas","Aravallis"],c:0}
+];
+let unlocked=0,score=0,level=0,items=[],pos=0,answered=false;
+const $=id=>document.getElementById(id);
+function show(id){["home","map","game","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id))}
+function map(){render();show("map")}
+function render(){
+ let b=$("levels");b.innerHTML="";
+ INFO.forEach((x,i)=>{
+  let d=document.createElement("div");
+  d.className="level "+(i>unlocked?"locked ":"")+(i<unlocked?"done":"");
+  d.innerHTML=`<div class="li">${i>unlocked?"🔒":x.icon}</div><h3>Level ${i+1} — ${x.name}</h3><small>${i>unlocked?"Locked":i<unlocked?"✓ Completed":"Ready"} • ${x.count} MCQs</small>`;
+  if(i<=unlocked)d.onclick=()=>start(i);b.appendChild(d);
+ })
+}
+function start(i){
+ level=i;
+ if(i===4){pos=0;show("game");loadMapQuestion();return}
+ items=DATA.map((q,n)=>[q.level,n]).filter(x=>x[0]===INFO[i].name).map(x=>x[1]);
+ pos=0;show("game");load()
+}
+function loadMapQuestion(){
+ answered=false;
+ let q=MAPQ[pos];
+ $("lname").textContent="Level 5 — Map Explorer";
+ $("qcount").textContent=`Map Question ${pos+1} of ${MAPQ.length}`;
+ $("bar").style.width=(pos/MAPQ.length*100)+"%";
+ $("question").textContent=q.q;
+ let o=$("options");o.innerHTML="";
+ q.a.forEach((t,i)=>{let b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+t;b.onclick=()=>answerMap(i);o.appendChild(b)});
+ $("feedback").textContent="";$("next").classList.add("hidden")
+}
+function answerMap(c){
+ if(answered)return;answered=true;
+ let q=MAPQ[pos],bs=[...$("options").children];
+ bs.forEach((b,i)=>{b.disabled=true;if(i===q.c)b.classList.add("correct");if(i===c&&i!==q.c)b.classList.add("wrong")});
+ if(c===q.c){score+=10;$("feedback").textContent="🗺️ Correct! +10 points"}else $("feedback").textContent="💡 Not quite. The highlighted option is correct.";
+ $("score").textContent=score;$("next").classList.remove("hidden");
+}
+function load(){
+ answered=false;let q=DATA[items[pos]];
+ $("lname").textContent=`Level ${level+1} — ${INFO[level].name}`;
+ $("qcount").textContent=`Question ${pos+1} of ${items.length}`;
+ $("bar").style.width=(pos/items.length*100)+"%";
+ $("question").textContent=q.q;
+ let o=$("options");o.innerHTML="";
+ q.options.forEach((t,i)=>{let b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+t;b.onclick=()=>answer(i);o.appendChild(b)});
+ $("feedback").textContent="";$("next").classList.add("hidden")
+}
+function answer(c){
+ if(answered)return;answered=true;let q=DATA[items[pos]],bs=[...$("options").children];
+ bs.forEach((b,i)=>{b.disabled=true;if(i===q.answer)b.classList.add("correct");if(i===c&&i!==q.answer)b.classList.add("wrong")});
+ if(c===q.answer){score+=10;$("feedback").textContent="🎉 Correct! +10 points"}else $("feedback").textContent="💡 Not quite. The highlighted option is correct.";
+ $("score").textContent=score;$("next").classList.remove("hidden")
+}
+function next(){
+ pos++;
+ if(level===4){if(pos<MAPQ.length)loadMapQuestion();else complete();return}
+ if(pos<items.length)load();else complete()
+}
+function complete(){
+ $("bar").style.width="100%";
+ if(level<INFO.length-1&&unlocked===level)unlocked++;
+ let final=level===INFO.length-1;
+ $("ri").textContent=final?"🏆":"🏅";$("rt").textContent=final?"Cultural Roots Champion!":"Level Complete!";
+ $("rs").textContent=score;$("rx").textContent=final?"You completed all 40 MCQs!":"Great work! The next level is now unlocked.";
+ $("rb").textContent=final?"🏆 FINAL CHAMPION":"⭐ LEVEL UNLOCKED";show("result")
+}
+show("home");
+</script></body></html>
